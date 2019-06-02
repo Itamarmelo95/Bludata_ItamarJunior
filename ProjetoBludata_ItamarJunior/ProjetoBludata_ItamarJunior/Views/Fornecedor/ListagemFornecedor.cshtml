@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "ListagemFornecedor";
+}
+
+<head>
+    <script src="~/Scripts/Pages/Fornecedor.js"></script>
+</head>
+<div class="panel panel-primary" style="margin-top:50px;">
+    <div class="panel-heading">
+        <h4>Fornecedores</h4>
+    </div>
+    <div id="principal" style="width: 100%;">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="k-header k-grid-toolbar">
+                    <div class="toolbar">
+                        <div style="margin-bottom:5px;">
+                            <a href="#" class="k-link k-button" title="Novo Fornecedor" onclick="novoFornecedor_Click();"><span class="k-icon k-i-plus"></span>Novo Fornecedor</a>
+                            <a href="#" class="k-link k-button" title="Nova Empresa" onclick="novaEmpresa_Click();"><span class="k-icon k-i-plus"></span>Nova Empresa</a>
+                        </div>
+                        <label>Nome</label>
+                        <input type="text" class="k-textbox" id="NomeFiltro" style="width: 30%;" />
+                        <label>CPF/CNPJ</label>
+                        <input type="text" id="CGCFiltro" style="width: 12%;" maxlength="14" />
+                        <label>Data Inicial</label>
+                        <input type="text" id="DataInicialFiltro" style="width: 12%;" />
+                        <label>Data Final</label>
+                        <input type="text" id="DataFinalFiltro" style="width: 12%;" />
+                        <button id='btn_Filtrar' type='button' class='k-button k-primary' style='width: 100px;'>Filtrar</button>
+                    </div>
+                </div>
+                <div id="grid_Fornecedores"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="window_Fornecedor" style="display:none; width:100%; ">
+    <div class="row">
+        <div class="col-md-12">
+            <label>Nome</label>
+        </div>
+        <div class="col-md-12">
+            <input type="text" class="k-textbox" id="Nome" style="width: 100%;" />
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class='col-md-3'>
+            <input type="radio" name="PF" id="PF" class="k-radio" checked="checked">
+            <label class="k-radio-label" for="PF">Pessoa Fisica</label>
+        </div>
+        <div class='col-md-3' style="padding-left:0px;">
+            <input type="radio" name="PJ" id="PJ" class="k-radio">
+            <label class="k-radio-label" for="PJ">Pessoa Jurídica</label>
+        </div>
+        <div class='col-md-6'>
+            <label>Empresa</label>
+
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-6">
+            <input type="text" id="CGC" style="width: 100%;" />
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="Empresa" style="width: 100%;" />
+        </div>
+    </div>
+
+
+    <div class='row' style="margin-top:10px;" id="DivPF">
+        <div class='col-md-6'>
+            <label>RG</label>
+            <input type="text" id="RG" style="width: 100%;" />
+        </div>
+        <div class="col-md-6">
+            <label>Data Nascimento</label>
+            <input type="text" id="DataNascimento" style="width: 100%;" />
+        </div>
+    </div>
+    <div class="row" style="padding:0px; margin:10px 0px 0px 0px;">
+        <div class="col-md-12 customPanelCollapse" id="div_Telefone" data-toggle="collapse" data-target="#panel_Telefone">
+            <span>Telefones</span>
+            <div style="float: right;">
+                <span class="k-icon k-i-arrow-60-down"></span>
+            </div>
+        </div>
+    </div>
+    <div id="panel_Telefone" class="row collapse customInternalPanelCollapse" style="margin-left:0px; margin-right:0px; padding-top:0px; padding-bottom:0px;">
+        <div class='col-md-12' style="text-align: left; padding: 5px 0px 5px 10px;">
+            <label>Telefone</label>
+        </div>
+        <div class='col-md-6' style="text-align: left; padding: 5px 0px 5px 10px;">
+            <input type="text" id="Telefone" style="width:100%" />
+        </div>
+        <div class='col-md-3' style="text-align: left; ">
+            <button id='btn_NovoTelefone' type='button' class='k-button k-primary' style='width: 150px; margin-top: 5px; margin-bottom: 5px;'>Salvar Telefone</button>
+        </div>
+        <div class='col-md-12' style="padding-left:0px; padding-right:0px;">
+            <div id='grid_Telefones'>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top:10px;">
+        <div class='col-md-12' style="text-align: center; margin-top:20px;">
+            <button id='btn_SalvarFornecedor' type='button' class='k-button k-primary' style='width: 200px;'>Salvar</button>
+        </div>
+    </div>
+</div>
+
+<div id="window_Empresa" style="display:none;">
+    <div class="row" style="margin-top:10px;">
+        <div class='col-md-12'>
+            <label>Nome Fantasia</label>
+        </div>
+        <div class='col-md-12'>
+            <input type="text" class="k-textbox" id="NomeFantasia" style="width: 100%;" />
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-6">
+            <label>UF</label>
+        </div>
+        <div class="col-md-6">
+            <label>CNPJ</label>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-6">
+            <input type="text" id="UF" style="width: 100%;" />
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="CNPJ" style="width: 100%;" />
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-12" style="text-align: center; margin-top:20px;">
+            <button id='btn_SalvarEmpresa' type='button' class='k-button k-primary' style='width: 200px;'>Salvar</button>
+        </div>
+    </div>
+</div>
+
+<span id='popupNotification'></span>
+
+<div id='loading' style="display:none;">
+    <span id='loading-image' />
+</div>
